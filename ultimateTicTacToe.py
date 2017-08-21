@@ -16,6 +16,42 @@ class UltimateTicTacToe():
                       'd':0, 'e':0, 'f':0,
                       'g':0, 'h':0, 'i':0}
     
+    def print_setup(self):
+        print("")
+        print("Type a, b, c, d, e, f, g, h, i to reference the mini tic tac toe games throughout the game")
+        keys = sorted(list(self.board.keys()))
+        for num in range(0,9,3):
+            key0 = keys[num]
+            key1 = keys[num+1]
+            key2 = keys[num+2]
+            line = ''
+            for i in range(3):
+                for key in [key0,key1,key2]:
+                    for j in range(3):
+                        if j == 2:
+                            line += ' ' + key + '  ' + '$ '
+                        else:
+                            line += ' ' + key + ' ' + '|' 
+                print(line[:-2])
+                line = ''
+                sep = '----------- $ '
+                if i == 2:
+                    sep = '~~~~~~~~~~~~~~'
+                if i == 2 and num == 6:
+                    break
+                print(sep+sep+sep[:-2])
+        
+        print("")
+        print("Within each mini game, reference each location by row and column")
+        for i in range(3):
+            line = ''
+            for j in range(3):
+                line += ' ' + str((i,j)) + ' ' + '|'
+            print(line[:-2])
+            if i != 2:
+                print('--------------------------')
+        print("")
+
     def print_board(self):
         keys = sorted(list(self.board.keys()))
         for num in range(0,9,3):
@@ -131,7 +167,6 @@ class UltimateTicTacToe():
         return False
         
     def game_over(self):
-        print(self.minis)
         xs = 0
         os = 0
         for key in self.minis:
@@ -152,7 +187,9 @@ class UltimateTicTacToe():
 
     
     def __main__(self):
-        print('Welcome to the 9x9 tic tac toe game')
+        print('Welcome to the Ultimate Tic-Tac-Toe game')
+        self.print_setup()
+
         index = 0
         next_mini = '' 
         while not self.game_over():
